@@ -53,3 +53,5 @@ $(document).ready(function() {
         currentStatus(lastSearchedCity);
     }
 });
+
+// changes on script are on previous commit
