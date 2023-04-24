@@ -6,7 +6,7 @@ previousSearchList = [];
 
 function currentStatus(city) {
 
-    queryURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&exclude=current,minutely,hourly,alert&appid=${apikey}`; 
+    queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`; 
 
     $.ajax({
         url: queryURL,
@@ -32,8 +32,8 @@ function currentStatus(city) {
     });
 };
 
-function weeklyStatus(lat, lon) {
-    var weekForecast = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+function weeklyStatus(city) {
+    var weekForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&exclude=current,minutely,hourly,alert&appid=${apiKey}`;
 
 $.ajax({
     url: weekForecast,
@@ -42,25 +42,25 @@ $.ajax({
     console.log(futureResponse);
     $("#weatherForecast").empty();
     
-    for (let i = 1; i < 6; i++) {
+    for (let i = 0; i < 40; i+=8) {
         var cityDetail = {
-            date: futureResponse.daily[i].dt,
-            icon: futureResponse.daily[i].weather[0].icon,
-            temp: futureResponse.daily[i].temp.day,
-            humidity: futureResponse.daily[i].humidity
+            date: futureResponse.list[i].dt,
+            icon: futureResponse.list[i].weather[0].icon,
+            temp: futureResponse.list[i].main.temp,
+            humidity: futureResponse.list[i].main.humidity
         };
 
         currDate = dayjs.unix(cityDetail.date).format("MM/DD/YYYY");
-        iconURL = `https://openweathermap.org/img/w/${iconCode.icon}.png alt=${futureResponse.daily[i].weather[0].main}"/>`;
+        iconURL = `https://openweathermap.org/img/w/${cityDetail.icon}.png alt=${futureResponse.list[i].weather[0].main}"/>`;
     
     futureCard = $(`
     <div class="pl-3>
     <div class "card pl-3 pt-3 mb-3 bg-primary text-light" style="width: 12rem;>
     <div class="card-body">
     <h5> ${currDate}</h5>
-    <p>${iconURL}</p>
-    <p>Temp: ${cityInfo.temp} F</p>
-    <p> Humidity: ${cityInfo.humidity}\%</p>
+    <p><img src="https://openweathermap.org/img/w/${cityDetail.icon}.png"/></p>
+    <p>Temp: ${cityDetail.temp} F</p>
+    <p> Humidity: ${cityDetail.humidity}\%</p>
     </div>
     </div>
     </div>
@@ -76,6 +76,7 @@ $("#searchBtn").on("click", function(event) {
 
     city = $("#cityInput").val().trim();
     currentStatus(city);
+    weeklyStatus(city);
     if (!previousSearchList.includes(city)) {
         previousSearchList.push(city);
             citySearch = $(`
