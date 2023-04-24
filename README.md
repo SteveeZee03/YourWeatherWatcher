@@ -23,7 +23,7 @@ liveServer (optional)
 
 ## <b>Usage</b>
 Demonstration:
-Assets\Demo
+<a href="https://github.com/SteveeZee03/YourWeatherWatcher/tree/main/Assets/Demo"> Assets\Demo </a>
 
 ## <b>License</b>
 This project is licensed under the MIT license.
