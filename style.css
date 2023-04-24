@@ -21,10 +21,10 @@ li {
 color: #f8f8f8!important;
 }
 
-#inputResult,
 #cityInfo,
 .card {
-    background-color: #648172!important;
+    background-color: #648172;
+
 }
 
 #inputResults {

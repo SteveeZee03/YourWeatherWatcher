@@ -55,11 +55,11 @@ $.ajax({
     
     futureCard = $(`
     <div class="pl-3>
-    <div class "card pl-3 pt-3 mb-3 bg-primary text-light" style="width: 12rem;>
+    <div class "card pl-3 pt-3 mb-3 bg-primary text-light" style="width: 12rem; background-color:#648172;>
     <div class="card-body">
     <h5> ${currDate}</h5>
     <p><img src="https://openweathermap.org/img/w/${cityDetail.icon}.png"/></p>
-    <p>Temp: ${cityDetail.temp} F</p>
+    <p>Temp: ${cityDetail.temp} °F</p>
     <p> Humidity: ${cityDetail.humidity}\%</p>
     </div>
     </div>
